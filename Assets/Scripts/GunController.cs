@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class GunController : MonoBehaviour
 {
@@ -22,33 +21,8 @@ public class GunController : MonoBehaviour
     public Camera fpsCam;
     public Transform attackPoint;
     public RaycastHit rayHit;
-    public LayerMask whatsIsEnemy;
+    public LayerMask whatsIsEnemy; 
 
-    // Graphics 
-
-    public TextMeshProUGUI text;
-    
-    public GameObject muzzleFlash, bulletHoleGraphic;
-    // public CamShake camShake;
-
-
-
-
-    private void Awake()
-    {
-
-        bulletsLeft = magazineSize;
-        readyToShot = true;
-
-
-    }
-
-    private void Update()
-    {
-
-        MyInput();
-
-    }
     private void MyInput()
     {
 
@@ -84,7 +58,6 @@ public class GunController : MonoBehaviour
         if(readyToShot && shooting && !reloading && bulletsLeft > 0)
         {
 
-            bulletsShots = bulletsPerTap;
             Shoot();
 
         }
@@ -95,15 +68,6 @@ public class GunController : MonoBehaviour
     private void Reload()
     {
 
-        reloading = true;
-        Invoke("ReloadFinished", reloadTime);
-
-    }private void ReloadFinished()
-    {
-
-        bulletsLeft = magazineSize;
-        reloading = false;
-
     }
 
     private void Shoot()
@@ -111,15 +75,8 @@ public class GunController : MonoBehaviour
 
         readyToShot = false;
 
-        // Spread
-        float x = Random.Range(-spread, spread);
-        float y = Random.Range(-spread, spread);
-
-        // Calculate the new direction with the spread 
-        Vector3 direction = fpsCam.transform.forward + new Vector3(x, y, 0);
-
         // RAYCAST PARA EL DISPARO
-        if(Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatsIsEnemy))
+        if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out rayHit, range, whatsIsEnemy))
         {
 
             Debug.Log(rayHit.collider.name);
@@ -132,28 +89,14 @@ public class GunController : MonoBehaviour
 
         }
 
-        // Graphics
-        Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0)); 
-        Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity); 
-
-
         bulletsLeft--;
-        bulletsShots--;
         //PERMITE INVOCAR UNA FUNCION CON X TIEMPO DE DELAY
         Invoke("ResetShoot", timeBtwShooting);
-
-        if(bulletsShots > 0 && bulletsLeft > 0)
-        {
-
-            Invoke("Shoot", timeBtwShooting);
-
-        }
-
     }
 
     private void ResetShoot()
     {
-        
+
         readyToShot = true;
 
     }
