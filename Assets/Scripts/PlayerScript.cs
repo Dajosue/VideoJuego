@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
 
-    public float runSpeed = 5f;
-    public float turnSpeed = 2f;
+    public float runSpeed;
+    public float turnSpeed;
 
     private float x, y;
 
@@ -29,6 +29,16 @@ public class PlayerScript : MonoBehaviour
         transform.Translate(x * Time.deltaTime * runSpeed, 0 , 0);
         transform.Translate(0, 0, y * Time.deltaTime * turnSpeed);
 
+        if (Input.GetKey("left shift"))
+        {
+            runSpeed = 10f;
+            turnSpeed = 10f;
+        }
+        else 
+        {
+            runSpeed = 5f;
+            turnSpeed = 5f;
+        }
         // Salto
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 

@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637680757198601265
+      ticks: 637680772695433406
     m_Hash: 2277032494
   m_LockFileStatus:
     m_FilePath: C:/Users/Dajosue/Documents/GitHub/VideoJuego/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637680757198606225
+      ticks: 637680772695437846
     m_Hash: 3469280101
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
