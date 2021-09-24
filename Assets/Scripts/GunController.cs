@@ -8,7 +8,7 @@ public class GunController : MonoBehaviour
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
-    int bulletsLeft, bulletsShot;
+    public int bulletsLeft, bulletsShot;
 
     //bools 
     bool shooting, readyToShoot, reloading;

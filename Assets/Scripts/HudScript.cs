@@ -6,12 +6,16 @@ using UnityEngine.UI;
 public class HudScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Slider healthSlider;
-    
+    public Slider bulletSlider;
+    private GunController gun;
+
+
     void Start()
     {
-        healthSlider.value = 30;
-        Debug.Log(healthSlider.value + " primer valor");
+        gun = FindObjectOfType<GunController>();
+        Text textAmmo = GameObject.Find("textGun").GetComponent<Text>();
+        bulletSlider.value = gun.magazineSize;
+        textAmmo.text = bulletSlider.value + " / " + gun.magazineSize;
     }
 
     // Update is called once per frame
@@ -22,10 +26,13 @@ public class HudScript : MonoBehaviour
     }
     void FixedUpdate() 
     {
-     if (Input.GetKey("g")) 
+        gun = FindObjectOfType<GunController>();
+        Text textAmmo = GameObject.Find("textGun").GetComponent<Text>();
+        textAmmo.text = gun.bulletsLeft + " / " + gun.magazineSize;
+        bulletSlider.value = gun.bulletsLeft;
+        if (gun.bulletsLeft==0)
         {
-            healthSlider.value = ((float)(healthSlider.value - 1));
-            Debug.Log(healthSlider.value + " valor actual");
+            textAmmo.text = "Pulse R to Reload";
         }
     }
 }
