@@ -3,6 +3,9 @@ using TMPro;
 
 public class GunController : MonoBehaviour
 {
+
+    public Animator animator;
+
     //Gun stats
     public int damage;
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
@@ -11,7 +14,7 @@ public class GunController : MonoBehaviour
     public int bulletsLeft, bulletsShot;
 
     //bools 
-    bool shooting, readyToShoot, reloading;
+    public bool shooting, readyToShoot, reloading;
 
     //Reference
     public Camera fpsCam;
@@ -38,10 +41,19 @@ public class GunController : MonoBehaviour
     }
     private void MyInput()
     {
-        if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
-        else shooting = Input.GetKeyDown(KeyCode.Mouse0);
+        if (allowButtonHold)
+        {
+            shooting = Input.GetKey(KeyCode.Mouse0);
+        }
+        else
+        {
+            shooting = Input.GetKeyDown(KeyCode.Mouse0);
+        }
 
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload();
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading)
+        {
+            Reload();
+        }
 
         //Shoot
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
@@ -93,6 +105,7 @@ public class GunController : MonoBehaviour
     private void Reload()
     {
         reloading = true;
+        animator.Play("reload");
         Invoke("ReloadFinished", reloadTime);
     }
     private void ReloadFinished()

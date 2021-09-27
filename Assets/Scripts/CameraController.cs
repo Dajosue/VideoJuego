@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour
         xRotation -= mouseY;
 
         // PARA QUE TENGA UN MÁXIMO 
-        xRotation = Mathf.Clamp(xRotation, -5f, 30f);
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 
